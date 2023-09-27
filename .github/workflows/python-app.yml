@@ -36,9 +36,7 @@ jobs:
         pytest
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-
-      uses: actions/checkout@v2
     - name: Download image
-      uses: actions/container-image-artifact-download@v2.0.1
+      uses: ishworkh/container-image-artifact-download@v2.0.1
       with:
         image: "my-image-name:latest"
