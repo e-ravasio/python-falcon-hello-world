@@ -41,6 +41,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag python-falcon-hello-world:latest
-           docker run ghcr.io/e-ravasio/python-falcon-hello-world::latest
-           docker push ghcr.io/e-ravasio/python-falcon-hello-world::latest
+      run: |
+        docker build . --file Dockerfile --tag python-falcon-hello-world:latest
+        docker run ghcr.io/e-ravasio/python-falcon-hello-world::latest
+        docker push ghcr.io/e-ravasio/python-falcon-hello-world::latest
