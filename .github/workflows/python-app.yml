@@ -34,13 +34,13 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Login to GitHub Container Registry
+      uses: docker/login-action@v1
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}    
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Upload image
-      uses: ishworkh/docker-image-artifact-upload@v2.0.1
-      with:
-        image: "my-image-name:latest"
-    - name: Download image
-      uses: ishworkh/docker-image-artifact-download@v2.0.1
-      with:
-        image: "my-image-name:latest"
+      run: docker build . --file Dockerfile --tag python-falcon-hello-world:latest
+           docker run ghcr.io/e-ravasio/python-falcon-hello-world::latest
+           docker push ghcr.io/e-ravasio/python-falcon-hello-world::latest
