@@ -36,6 +36,10 @@ jobs:
         pytest
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Download an image
+    download_image:
+    - name: Checkout project
+      uses: actions/checkout@v2
+    - name: Download image
+      uses: e-ravasio/python-falcon-hello-world@v2.0.1
       with:
         image: "my-image-name:latest"
