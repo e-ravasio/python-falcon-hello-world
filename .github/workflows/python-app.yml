@@ -34,14 +34,19 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    - name: Login to GitHub Container Registry
-      uses: docker/login-action@v1
+#    - name: Login to GitHub Container Registry
+#      uses: docker/login-action@v1
+#      with:
+#        registry: ghcr.io
+#        username: ${{ github.actor }}
+#        password: ${{ secrets.GITHUB_TOKEN }}    
+    - name: Login to DockerHub Registry
+      uses: docker/login-action@v3
       with:
-        registry: ghcr.io
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}    
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
     - name: Build the Docker image
       run: |
         docker build . --file Dockerfile --tag python-falcon-hello-world:latest
         #docker run ghcr.io/e-ravasio/python-falcon-hello-world::latest
-        docker push ghcr.io/e-ravasio/python-falcon-hello-world::latest
+        docker push eravasio/python-falcon-hello-world::latest
