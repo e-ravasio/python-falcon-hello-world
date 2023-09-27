@@ -15,6 +15,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout project
     - uses: actions/checkout@v2
     - name: Set up Python 3.8
       uses: actions/setup-python@v2
@@ -36,9 +37,9 @@ jobs:
         pytest
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
-    - name: Checkout project
+
       uses: actions/checkout@v2
     - name: Download image
-      uses: e-ravasio/python-falcon-hello-world@v2.0.1
+      uses: actions/container-image-artifact-download@v2.0.1
       with:
         image: "my-image-name:latest"
