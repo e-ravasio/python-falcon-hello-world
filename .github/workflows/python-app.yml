@@ -37,6 +37,5 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
     - name: Download an image
-      uses: e-ravasio/container-image-artifact-download@v1.0.0
       with:
         image: "my-image-name:latest"
